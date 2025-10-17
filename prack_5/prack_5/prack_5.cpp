@@ -7,12 +7,12 @@ using namespace std;
 
 class Node{
 public:
-    int date;
+    int data;
     Node* next;
     Node* prev;
 
     Node(int value) {
-        date = value;
+        data = value;
         next = nullptr;
         prev = nullptr;
     }
@@ -30,7 +30,7 @@ public:
         tail = nullptr;
     }
 
-    // Добавление в конец списка
+   
     void push_back(int value) {
         Node* newNode = new Node(value);
 
@@ -44,7 +44,7 @@ public:
         }
     }
 
-    // Добавление в начало списка
+    
     void push_front(int value) {
         Node* newNode = new Node(value);
 
@@ -111,7 +111,7 @@ public:
         }
 
         while (current != nullptr) {
-            cout << current->date << " ";
+            cout << current->data << " ";
             current = current->next;
         }
 
@@ -134,8 +134,8 @@ public:
             Node* current = head;
 
             while (current->next != end) {
-                if (current->date > current->next->date) {
-                    swap(current->date, current->next->date);
+                if (current->data > current->next->data) {
+                    swap(current->data, current->next->data);
                     swapped = true;
                 }
                 current = current->next;
@@ -147,7 +147,7 @@ public:
 
     void delete_node(Node* node) {
 
-        if (node->next == nullptr) {
+        if (node == nullptr) {
             return;
         }
 
@@ -177,17 +177,17 @@ public:
             return;
         }
 
-        unordered_set<int> list;
+        unordered_set<int> SetList;
         Node* current = head;
 
         while (current != nullptr) {
             Node* next = current->next;
 
-            if (list.find(current->date) != list.end()) {
+            if (SetList.find(current->data) != SetList.end()) {
                 delete_node(current);
             }
             else {
-                list.insert(current->date);
+                SetList.insert(current->data);
             }
 
             current = next;
@@ -208,7 +208,7 @@ int main()
     int choise;
     int value;
 
-    cout << "===== МЕНЮ =====" << endl;
+   
 
     while (true) {
         cout << "\n===== МЕНЮ =====" << endl;
