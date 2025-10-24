@@ -145,31 +145,6 @@ public:
     }
 
 
-    void delete_node(Node* node) {
-
-        if (node == nullptr) {
-            return;
-        }
-
-        
-        if (node->prev != nullptr) {
-            node->prev->next = node->next;  
-        }
-        else {
-            head = node->next;  
-        }
-
-      
-        if (node->next != nullptr) {
-            node->next->prev = node->prev;  
-        }
-        else {
-            tail = node->prev;  
-        }
-
-        
-        delete node;
-    }
 
     void remove_duplicates() {
         
@@ -177,20 +152,29 @@ public:
             return;
         }
 
-        unordered_set<int> SetList;
         Node* current = head;
-
         while (current != nullptr) {
-            Node* next = current->next;
 
-            if (SetList.find(current->data) != SetList.end()) {
-                delete_node(current);
-            }
-            else {
-                SetList.insert(current->data);
+            Node* runNode = current;
+            while (runNode->next != nullptr) {
+                if (runNode->next->data == current->data) {
+                    Node* deleteNode = runNode->next;
+                    runNode->next = deleteNode->next;
+
+                    if (deleteNode->next != nullptr) {
+                        deleteNode->next->prev = runNode;
+                    }
+                    else {
+                        tail = runNode;
+                    }
+                    delete deleteNode;
+                }
+                else {
+                    runNode = runNode->next;
+                }
             }
 
-            current = next;
+            current = current->next;
         }
 
        
